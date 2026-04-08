@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: farmer-java-deployment
+  labels:
+    app: farmer-java
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: farmer-java
+  template:
+    metadata:
+      labels:
+        app: farmer-java
+    spec:
+      containers:
+      - name: farmer-java
+        image: rajkumar160116/my-java-k8s-app:2.0
+        ports:
+        - containerPort: 8080
