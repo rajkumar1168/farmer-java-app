@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        git 'Default'
+    }
+
     environment {
         DOCKER_HUB = "rajkumar160116"
         IMAGE_NAME = "my-java-k8s-app"
@@ -8,12 +12,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/rajkumar1168/farmer-java-app.git'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
