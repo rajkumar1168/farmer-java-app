@@ -1,13 +1,15 @@
-# Step 1: Build stage
-FROM eclipse-temurin:17-jdk-alpine AS build
+# Build + runtime in one image (simple Java app)
+FROM eclipse-temurin:17-jdk-alpine
+
 WORKDIR /app
-COPY . .  # Copy all files, including App.java
+
+# Copy ONLY the Java file (safe and explicit)
+COPY App.java .
+
+# Compile
 RUN javac App.java
 
-# Step 2: Runtime stage
-FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-COPY --from=build /app/*.class /app/  
 EXPOSE 8080
-CMD ["java", "App"]
 
+# Run the app
+CMD ["java", "App"]
